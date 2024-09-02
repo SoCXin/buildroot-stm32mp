@@ -13,7 +13,7 @@ jobs:
           path: buildroot-external-st
       - uses: actions/checkout@v4
         with:
-          repository: bootlin/buildroot
+          repository: socxin/buildroot
           ref: ${{ env.repo_version }}
           path: buildroot
       - uses: actions/setup-python@v5
@@ -34,8 +34,6 @@ jobs:
       - name: Build SDK
         run: make -C buildroot O=../output sdk
         
-      - name: Compress sdcard.img
-        run: gzip -9 output/images/sdcard.img 
       - run: tar -czvf ${{ matrix.config }}.tar.gz   output/images/* 
       - name: Store images
         uses: actions/upload-artifact@v2
